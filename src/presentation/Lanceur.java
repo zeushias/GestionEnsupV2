@@ -1,6 +1,7 @@
 package presentation;
 
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import idao.Dao;
@@ -56,7 +57,7 @@ public class Lanceur {
 		// affichage basique
 		System.out.println("--------------------------------------------------------------");
 		System.out.println("Pour insérer un étudiant tapez 1");
-		System.out.println("Pour lister les étudiants tapez 2");
+		System.out.println("Pour consulter les informations d'un étudiant tapez 2");
 		System.out.println("Pour supprimer un étudiant tapez 3");
 		System.out.println("Pour modifier le nom d'un étudiant tapez 4");
 		System.out.println("Pour associer une école à un étudiant tapez 5");
@@ -75,7 +76,7 @@ public class Lanceur {
 		// affichage basique
 		System.out.println("--------------------------------------------------------------");
 		System.out.println("Pour insérer un étudiant tapez 1");
-		System.out.println("Pour lister les étudiants tapez 2");
+		System.out.println("Pour consulter les informations d'un étudiant tapez 2");
 		System.out.println("Pour supprimer un étudiant tapez 3");
 		System.out.println("Pour modifier le nom d'un étudiant tapez 4");
 		System.out.println("Pour associer une école à un étudiant tapez 5");
@@ -145,7 +146,7 @@ public class Lanceur {
 		System.out.println();
 		String passwordUser = sc.next();
 		System.out.println();
-		
+
 		while (!profilUser.equals("R") && !profilUser.equals("D")) {
 			System.out.print("Veuillez saisir votre profil utilisateur D pour Directeur R pour Responsable étude : ");
 			System.out.println();
@@ -175,6 +176,11 @@ public class Lanceur {
 
 			break;
 		case 2:
+
+			int id = 0;
+			while (id == 0) {
+				id = saisirIdentifiantEtudiantAconsulter();
+			}
 
 			break;
 
@@ -224,8 +230,25 @@ public class Lanceur {
 		String dateNaissance = scan.next();
 		System.out.println();
 
-		Etudiant etudiant = new Etudiant(nomEtudiant, prenomEtudiant, emailEtudaint, adresseEtudiant,
-				telephoneEtudiant, dateNaissance);
+		Etudiant etudiant = new Etudiant(nomEtudiant, prenomEtudiant, emailEtudaint, adresseEtudiant, telephoneEtudiant,
+				dateNaissance);
 		return etudiant;
+	}
+
+	/**
+	 * saisir l'Identifiant de l'Etudiant A consulter
+	 * @return un nombre saisie par l'utilisateur
+	 */
+	public static int saisirIdentifiantEtudiantAconsulter() {
+		Scanner scan = new Scanner(System.in);
+		int idEtudiant = 0;
+		System.out.println("Entrer l'identifiant de l'étudiant à consulter");
+		try {
+			idEtudiant = scan.nextInt();
+
+		} catch (InputMismatchException e) {
+			System.out.println("Vous devez saisir un nombre  ");
+		}
+		return idEtudiant;
 	}
 }

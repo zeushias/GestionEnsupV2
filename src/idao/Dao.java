@@ -54,19 +54,20 @@ public class Dao {
 
 			// etape5 parcours du resultSet
 			while (rs.next()) {
-				System.out.println(rs.getInt("idPersonne"));
-				System.out.println(" ");
+				System.out.print(rs.getInt("idPersonne"));
+				System.out.print(" ");
 				System.out.print(rs.getString("nom"));
 				System.out.print(" ");
-				System.out.println(rs.getString("prenom"));
+				System.out.print(rs.getString("prenom"));
 				System.out.print(" ");
-				System.out.println(rs.getString("email"));
+				System.out.print(rs.getString("email"));
 				System.out.print(" ");
-				System.out.println(rs.getString("adresse"));
+				System.out.print(rs.getString("adresse"));
 				System.out.print(" ");
-				System.out.println(rs.getString("telephone"));
+				System.out.print(rs.getString("telephone"));
 				System.out.print(" ");
-				System.out.println(rs.getString("dateNaissance"));
+				System.out.print(rs.getString("date_naissance"));
+				System.out.println(" ");
 			}
 
 		} catch (SQLException e) {
@@ -202,9 +203,9 @@ public class Dao {
 			// etape 3 creation du statement
 			st = cn.createStatement();
 			String sql = "INSERT INTO `personne` (`nom`, `prenom`,`email`, "
-					+ "`adresse`,`telephone`) "
+					+ "`adresse`,`telephone`, `date_naissance`) "
 					+ "VALUES ('" + etudiant.getNom() + "','"+ etudiant.getPrenom() + "', '"
-					+ etudiant.getEmail()+"', '"+etudiant.getAdresse()+"', '"+etudiant.getTelephone() +"')";
+					+ etudiant.getEmail()+"', '"+etudiant.getAdresse()+"', '"+etudiant.getTelephone() +"', '"+etudiant.getDateNaissanceEtudiant() +"')";
 
 			// etape 4 executer la requette
 			st.executeUpdate(sql);

@@ -15,29 +15,29 @@ public class Etudiant extends Personne{
 
 	// attributs
 
-	private Date dateNaissanceEtudiant;
+	private String dateNaissanceEtudiant;
 	
 	// constructeur
 
 	public Etudiant(int idPersonne, String nom, String prenom, String email, String adresse, String telephone,
-			Date dateNaissanceEtudiant) {
+			String dateNaissanceEtudiant) {
 		super(idPersonne, nom, prenom, email, adresse, telephone);
 		this.dateNaissanceEtudiant = dateNaissanceEtudiant;
 	}
 
 	public Etudiant(String nom, String prenom, String email, String adresse, String telephone,
-			Date dateNaissanceEtudiant) {
+			String dateNaissanceEtudiant) {
 		super(nom, prenom, email, adresse, telephone);
 		this.dateNaissanceEtudiant = dateNaissanceEtudiant;
 	}
 	
 	// getters et setters
 
-	public Date getDateNaissanceEtudiant() {
+	public String getDateNaissanceEtudiant() {
 		return dateNaissanceEtudiant;
 	}
 
-	public void setDateNaissanceEtudiant(Date dateNaissanceEtudiant) {
+	public void setDateNaissanceEtudiant(String dateNaissanceEtudiant) {
 		this.dateNaissanceEtudiant = dateNaissanceEtudiant;
 	}
 
