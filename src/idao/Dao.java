@@ -330,7 +330,7 @@ public class Dao {
 	public void supprimerEtudiant(int id) {
 
 		// Information d'acc�s � la base de donn�es
-		
+
 		int resultat;
 
 		Connection connection = null;
@@ -362,7 +362,7 @@ public class Dao {
 			e.printStackTrace();
 		} finally {
 			try {
-				// Etape 5 : Lib�rer ressources de la m�moire
+				// Etape 5 : Liberer ressources de la memoire
 				connection.close();
 				statement.close();
 			} catch (SQLException e) {
@@ -382,7 +382,7 @@ public class Dao {
 	public void modifierEtudiant(int id, String email) {
 
 		// Information d'acces a la base de donnees
-		
+
 		int resultat;
 
 		Connection connection = null;
@@ -421,6 +421,48 @@ public class Dao {
 				e.printStackTrace();
 			}
 		}
-
 	}
+
+	public static Integer verifierCoursEtudiant(int idEtudiant) {
+		Integer id = 0;
+		try {
+			// etape1 chargement du driver
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// etape2 recupertion de la connnexion
+
+			cn = DriverManager.getConnection(url, login, password);
+
+			// etape 3 creation du statement
+			st = cn.createStatement();
+			String sql = "select * from personne_cours where  `idPersonne` =  '" + idEtudiant + "'";
+
+			// etape 4 executer la requette
+
+			rs = st.executeQuery(sql);
+
+			// etape5 parcours du resultSet
+			while (rs.next()) {
+				id = rs.getInt("idPersonne");
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Le cours n'existe pas");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Le cours n'existe pas");
+		} finally {
+
+			// etape 5 liberer les ressources
+			try {
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return id;
+	}
+
 }

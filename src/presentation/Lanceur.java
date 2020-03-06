@@ -222,8 +222,15 @@ public class Lanceur {
 			System.out.println("Saisir l'identifiant de l'etudiant ");
 			int id = scan.nextInt();
 			Dao etuDao = new Dao();
-			etuDao.supprimerEtudiant(id);
-			affichage();
+			int etud = etuDao.verifierCoursEtudiant(id);
+			if(etud ==0) {
+				etuDao.supprimerEtudiant(id);
+				affichage();
+			} else {
+				System.out.println("Vous pouvez pas supprimer cet utlisateur");
+				affichage();
+			}
+			
 			break;
 		case 4:
 			System.out.println("Saisir l'identifiant de l'etudiant a modifier ");
