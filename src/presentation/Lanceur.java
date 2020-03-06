@@ -112,6 +112,7 @@ public class Lanceur {
 			}
 		} else {
 			// compteur++;
+			System.out.println("Mauvais utilisateur reprenez");
 			affichageRechercheUtilisateur();
 		}
 
@@ -167,21 +168,29 @@ public class Lanceur {
 	 */
 	private static void operation(int chiffre) {
 		Scanner scan = new Scanner(System.in);
+		Etudiant etudiant = null;
 		switch (chiffre) {
 		case 1:
 			// enrégistrer un étudiant
 
-			Etudiant etudiant = enregistrementEtudiant();
+			etudiant = enregistrementEtudiant();
 			Dao.creerEtudiant(etudiant);
 
 			break;
 		case 2:
 
-			int id = 0;
-			while (id == 0) {
-				id = saisirIdentifiantEtudiantAconsulter();
+			int idEtudiant = 0;
+			while (idEtudiant == 0) {
+				idEtudiant = saisirIdentifiantEtudiantAconsulter();
 			}
-
+			etudiant = Dao.lireUnEtudiant(idEtudiant);
+			if (etudiant != null) {
+				
+			} else {
+				// compteur++;
+				System.out.println("L'étudiant n'existe pas");
+			}
+			
 			break;
 
 		case 3:
@@ -237,6 +246,7 @@ public class Lanceur {
 
 	/**
 	 * saisir l'Identifiant de l'Etudiant A consulter
+	 * 
 	 * @return un nombre saisie par l'utilisateur
 	 */
 	public static int saisirIdentifiantEtudiantAconsulter() {

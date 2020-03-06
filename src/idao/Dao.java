@@ -169,7 +169,7 @@ public class Dao {
 			System.out.println("L'utilisateur n'existe pas");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-
+			System.out.println("L'utilisateur n'existe pas");
 			e.printStackTrace();
 		} finally {
 
@@ -232,8 +232,8 @@ public class Dao {
 	/**
 	 * Lire les informations d'un etudiant
 	 */
-	public static void lireUnEtudiant(int idEtudiant) {
-
+	public static Etudiant lireUnEtudiant(int idEtudiant) {
+		Etudiant etudiant = null;
 		try {
 			// etape1 chargement du driver
 
@@ -248,25 +248,14 @@ public class Dao {
 			String sql = "select * from personne where  `idPersonne` =  '" + idEtudiant + "'";
 
 			// etape 4 executer la requette
-			System.out.println("Etudiant à consulter ");
+			
 			rs = st.executeQuery(sql);
 
 			// etape5 parcours du resultSet
 			while (rs.next()) {
-				System.out.print(rs.getInt("idPersonne"));
-				System.out.print(" ");
-				System.out.print(rs.getString("nom"));
-				System.out.print(" ");
-				System.out.print(rs.getString("prenom"));
-				System.out.print(" ");
-				System.out.print(rs.getString("email"));
-				System.out.print(" ");
-				System.out.print(rs.getString("adresse"));
-				System.out.print(" ");
-				System.out.print(rs.getString("telephone"));
-				System.out.print(" ");
-				System.out.print(rs.getString("date_naissance"));
-				System.out.println(" ");
+				etudiant = new Etudiant(rs.getInt("idPersonne"), rs.getString("nom"), 
+						rs.getString("prenom"), rs.getString("email"), rs.getString("adresse"), 
+						rs.getString("telephone"), rs.getString("date_naissance"));
 			}
 
 		} catch (SQLException e) {
@@ -284,6 +273,7 @@ public class Dao {
 				e.printStackTrace();
 			}
 		}
+		return etudiant;
 	}
 
 }
