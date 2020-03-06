@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import metier.Cours;
 import metier.Etudiant;
 import metier.Utilisateur;
 
@@ -54,19 +55,20 @@ public class Dao {
 
 			// etape5 parcours du resultSet
 			while (rs.next()) {
-				System.out.println(rs.getInt("idPersonne"));
-				System.out.println(" ");
+				System.out.print(rs.getInt("idPersonne"));
+				System.out.print(" ");
 				System.out.print(rs.getString("nom"));
 				System.out.print(" ");
-				System.out.println(rs.getString("prenom"));
+				System.out.print(rs.getString("prenom"));
 				System.out.print(" ");
-				System.out.println(rs.getString("email"));
+				System.out.print(rs.getString("email"));
 				System.out.print(" ");
-				System.out.println(rs.getString("adresse"));
+				System.out.print(rs.getString("adresse"));
 				System.out.print(" ");
-				System.out.println(rs.getString("telephone"));
+				System.out.print(rs.getString("telephone"));
 				System.out.print(" ");
-				System.out.println(rs.getString("dateNaissance"));
+				System.out.print(rs.getString("date_naissance"));
+				System.out.println(" ");
 			}
 
 		} catch (SQLException e) {
@@ -168,7 +170,7 @@ public class Dao {
 			System.out.println("L'utilisateur n'existe pas");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-
+			System.out.println("L'utilisateur n'existe pas");
 			e.printStackTrace();
 		} finally {
 
@@ -183,7 +185,7 @@ public class Dao {
 		}
 		return user;
 	}
-	
+
 	/**
 	 * 
 	 * @param etudiant
@@ -202,16 +204,15 @@ public class Dao {
 			// etape 3 creation du statement
 			st = cn.createStatement();
 			String sql = "INSERT INTO `personne` (`nom`, `prenom`,`email`, "
-					+ "`adresse`,`telephone`) "
-					+ "VALUES ('" + etudiant.getNom() + "','"+ etudiant.getPrenom() + "', '"
-					+ etudiant.getEmail()+"', '"+etudiant.getAdresse()+"', '"+etudiant.getTelephone() +"')";
+					+ "`adresse`,`telephone`, `date_naissance`) " + "VALUES ('" + etudiant.getNom() + "','"
+					+ etudiant.getPrenom() + "', '" + etudiant.getEmail() + "', '" + etudiant.getAdresse() + "', '"
+					+ etudiant.getTelephone() + "', '" + etudiant.getDateNaissanceEtudiant() + "')";
 
 			// etape 4 executer la requette
 			st.executeUpdate(sql);
 			System.out.println("Etudiant enrégistré avec succès !!!! ");
 
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 
@@ -228,4 +229,97 @@ public class Dao {
 			}
 		}
 	}
+
+	/**
+	 * Lire les informations d'un etudiant
+	 */
+	public static Etudiant lireUnEtudiant(int idEtudiant) {
+		Etudiant etudiant = null;
+		try {
+			// etape1 chargement du driver
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// etape2 recupertion de la connnexion
+
+			cn = DriverManager.getConnection(url, login, password);
+
+			// etape 3 creation du statement
+			st = cn.createStatement();
+			String sql = "select * from personne where  `idPersonne` =  '" + idEtudiant + "'";
+
+			// etape 4 executer la requette
+			
+			rs = st.executeQuery(sql);
+
+			// etape5 parcours du resultSet
+			while (rs.next()) {
+				etudiant = new Etudiant(rs.getInt("idPersonne"), rs.getString("nom"), 
+						rs.getString("prenom"), rs.getString("email"), rs.getString("adresse"), 
+						rs.getString("telephone"), rs.getString("date_naissance"));
+			}
+
+		} catch (SQLException e) {
+			System.out.println("L'étudiant n'existe pas");
+		} catch (ClassNotFoundException e) {
+			System.out.println("L'étudiant n'existe pas");
+		} finally {
+
+			// etape 5 liberer les ressources
+			try {
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return etudiant;
+	}
+
+	/**
+	 * Lire les informations d'un etudiant
+	 */
+	public static Cours selectionnerUnCours(String cours) {
+		Cours c = null;
+		try {
+			// etape1 chargement du driver
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// etape2 recupertion de la connnexion
+
+			cn = DriverManager.getConnection(url, login, password);
+
+			// etape 3 creation du statement
+			st = cn.createStatement();
+			String sql = "select * from cours where  `theme` =  '" + cours + "'";
+
+			// etape 4 executer la requette
+			
+			rs = st.executeQuery(sql);
+
+			// etape5 parcours du resultSet
+			while (rs.next()) {
+				c = new Cours(rs.getString("theme"), rs.getInt("nombreHeure"));
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Le cours n'existe pas");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Le cours n'existe pas");
+		} finally {
+
+			// etape 5 liberer les ressources
+			try {
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return c;
+	}
+
 }

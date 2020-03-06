@@ -1,20 +1,29 @@
+/**
+ * Class main pour lancer notre application de gestion d'école
+ * 
+ */
 package presentation;
 
-import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import idao.CoursPersonneDao;
 import idao.Dao;
+import metier.Cours;
 import metier.Etudiant;
 import metier.Utilisateur;
+import service.IService;
 
 /**
  * Class main pour lancer notre application de gestion de l'école
  * 
- * @author zeushias
+ * @author KODZO
+ * @author YOEKO
+ * @author LOIK
  *
  */
 public class Lanceur {
-
+	
 	public static void main(String[] args) {
 
 		String reponse = "";
@@ -56,7 +65,7 @@ public class Lanceur {
 		// affichage basique
 		System.out.println("--------------------------------------------------------------");
 		System.out.println("Pour insérer un étudiant tapez 1");
-		System.out.println("Pour lister les étudiants tapez 2");
+		System.out.println("Pour consulter les informations d'un étudiant tapez 2");
 		System.out.println("Pour supprimer un étudiant tapez 3");
 		System.out.println("Pour modifier le nom d'un étudiant tapez 4");
 		System.out.println("Pour associer une école à un étudiant tapez 5");
@@ -75,7 +84,7 @@ public class Lanceur {
 		// affichage basique
 		System.out.println("--------------------------------------------------------------");
 		System.out.println("Pour insérer un étudiant tapez 1");
-		System.out.println("Pour lister les étudiants tapez 2");
+		System.out.println("Pour consulter les informations d'un étudiant tapez 2");
 		System.out.println("Pour supprimer un étudiant tapez 3");
 		System.out.println("Pour modifier le nom d'un étudiant tapez 4");
 		System.out.println("Pour associer une école à un étudiant tapez 5");
@@ -111,6 +120,7 @@ public class Lanceur {
 			}
 		} else {
 			// compteur++;
+			System.out.println("Mauvais utilisateur reprenez");
 			affichageRechercheUtilisateur();
 		}
 
@@ -145,7 +155,7 @@ public class Lanceur {
 		System.out.println();
 		String passwordUser = sc.next();
 		System.out.println();
-		
+
 		while (!profilUser.equals("R") && !profilUser.equals("D")) {
 			System.out.print("Veuillez saisir votre profil utilisateur D pour Directeur R pour Responsable étude : ");
 			System.out.println();
@@ -166,15 +176,41 @@ public class Lanceur {
 	 */
 	private static void operation(int chiffre) {
 		Scanner scan = new Scanner(System.in);
+		Etudiant etudiant = null;
+		int idEtudiant = 0;
 		switch (chiffre) {
 		case 1:
 			// enrégistrer un étudiant
 
-			Etudiant etudiant = enregistrementEtudiant();
+			etudiant = enregistrementEtudiant();
 			Dao.creerEtudiant(etudiant);
 
 			break;
 		case 2:
+
+			while (idEtudiant == 0) {
+				idEtudiant = saisirIdentifiantEtudiantAconsulter();
+			}
+			etudiant = Dao.lireUnEtudiant(idEtudiant);
+			if (etudiant != null) {
+				System.out.print(etudiant.getIdPersonne());
+				System.out.print(" ");
+				System.out.print(etudiant.getNom());
+				System.out.print(" ");
+				System.out.print(etudiant.getPrenom());
+				System.out.print(" ");
+				System.out.print(etudiant.getEmail());
+				System.out.print(" ");
+				System.out.print(etudiant.getAdresse());
+				System.out.print(" ");
+				System.out.print(etudiant.getTelephone());
+				System.out.print(" ");
+				System.out.print(etudiant.getDateNaissanceEtudiant());
+				System.out.println(" ");
+			} else {
+				// compteur++;
+				System.out.println("L'étudiant n'existe pas");
+			}
 
 			break;
 
@@ -184,6 +220,28 @@ public class Lanceur {
 		case 4:
 			break;
 		case 5:
+
+			System.out.println("Saisir le thème du cours");
+			String cours = scan.next();
+						
+			// 
+			
+			while (idEtudiant == 0) {
+				idEtudiant = saisirIdentifiantEtudiantAconsulter();
+			}
+			etudiant = Dao.lireUnEtudiant(idEtudiant);
+			Cours c = Dao.selectionnerUnCours(cours);
+			
+			if (etudiant == null ) {
+				System.out.println("L'étudiant n'existe pas");
+			}
+			if (c == null ) {
+				System.out.println("Le cours n'existe pas");
+			}
+			if(etudiant != null && c != null) {
+				// classe anonyme
+				new CoursPersonneDao().associerCoursEtudiant(etudiant, c);
+			}
 			break;
 		case 6:
 			// lister les étudiants
@@ -224,8 +282,28 @@ public class Lanceur {
 		String dateNaissance = scan.next();
 		System.out.println();
 
-		Etudiant etudiant = new Etudiant(nomEtudiant, prenomEtudiant, emailEtudaint, adresseEtudiant,
-				telephoneEtudiant, new Date());
+		Etudiant etudiant = new Etudiant(nomEtudiant, prenomEtudiant, emailEtudaint, adresseEtudiant, telephoneEtudiant,
+				dateNaissance);
 		return etudiant;
 	}
+
+	/**
+	 * saisir l'Identifiant de l'Etudiant A consulter
+	 * 
+	 * @return un nombre saisie par l'utilisateur
+	 */
+	public static int saisirIdentifiantEtudiantAconsulter() {
+		Scanner scan = new Scanner(System.in);
+		int idEtudiant = 0;
+		System.out.println("Entrer l'identifiant de l'étudiant");
+		try {
+			idEtudiant = scan.nextInt();
+
+		} catch (InputMismatchException e) {
+			System.out.println("Vous devez saisir un nombre  ");
+		}
+		return idEtudiant;
+	}
+	
+	
 }

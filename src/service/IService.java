@@ -1,5 +1,5 @@
 /**
- * 
+ * Interface fonctionnelle pour associer un étudiant à un cours
  */
 package service;
 
@@ -8,7 +8,9 @@ import metier.Etudiant;
 
 /**
  * 
- * @author zeuhias
+ * @author KODZO
+ * @author YOEKO
+ * @author LOIK
  *
  */
 @FunctionalInterface
