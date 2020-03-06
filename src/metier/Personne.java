@@ -1,11 +1,15 @@
+/**
+ * la classe Personne
+ */
 package metier;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 
- * @author zeushias
+ * @author KODZO
+ * @author YOEKO
+ * @author LOIK
  *
  */
 public class Personne {

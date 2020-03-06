@@ -1,5 +1,5 @@
 /**
- * 
+ * Classe Ecole
  */
 package metier;
 
@@ -11,7 +11,7 @@ package metier;
  */
 public class Ecole {
 
-	// propriétés
+	// propriï¿½tï¿½s
 
 	private String nomEcole;
 	private String emailEcole;

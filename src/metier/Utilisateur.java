@@ -1,5 +1,5 @@
 /**
- * 
+ * la classe Utilisateur
  */
 package metier;
 
@@ -11,7 +11,7 @@ package metier;
  */
 public class Utilisateur {
 
-	// propriétés
+	// propriï¿½tï¿½s
 
 	private int idUser;
 	private String login;
