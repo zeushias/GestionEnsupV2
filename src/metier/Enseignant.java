@@ -1,3 +1,6 @@
+/**
+ * la classe Enseignant
+ */
 package metier;
 
 /**
