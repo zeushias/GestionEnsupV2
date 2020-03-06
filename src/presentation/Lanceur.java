@@ -225,7 +225,7 @@ public class Lanceur {
 		System.out.println();
 
 		Etudiant etudiant = new Etudiant(nomEtudiant, prenomEtudiant, emailEtudaint, adresseEtudiant,
-				telephoneEtudiant, new Date());
+				telephoneEtudiant, dateNaissance);
 		return etudiant;
 	}
 }
