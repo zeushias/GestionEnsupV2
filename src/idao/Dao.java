@@ -249,14 +249,14 @@ public class Dao {
 			String sql = "select * from personne where  `idPersonne` =  '" + idEtudiant + "'";
 
 			// etape 4 executer la requette
-			
+
 			rs = st.executeQuery(sql);
 
 			// etape5 parcours du resultSet
 			while (rs.next()) {
-				etudiant = new Etudiant(rs.getInt("idPersonne"), rs.getString("nom"), 
-						rs.getString("prenom"), rs.getString("email"), rs.getString("adresse"), 
-						rs.getString("telephone"), rs.getString("date_naissance"));
+				etudiant = new Etudiant(rs.getInt("idPersonne"), rs.getString("nom"), rs.getString("prenom"),
+						rs.getString("email"), rs.getString("adresse"), rs.getString("telephone"),
+						rs.getString("date_naissance"));
 			}
 
 		} catch (SQLException e) {
@@ -296,12 +296,12 @@ public class Dao {
 			String sql = "select * from cours where  `theme` =  '" + cours + "'";
 
 			// etape 4 executer la requette
-			
+
 			rs = st.executeQuery(sql);
 
 			// etape5 parcours du resultSet
 			while (rs.next()) {
-				c = new Cours(rs.getString("theme"), rs.getInt("nombreHeure"));
+				c = new Cours(rs.getInt("idCours"), rs.getString("theme"), rs.getInt("nombreHeure"));
 			}
 
 		} catch (SQLException e) {

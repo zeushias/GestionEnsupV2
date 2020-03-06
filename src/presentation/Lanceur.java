@@ -23,7 +23,7 @@ import service.IService;
  *
  */
 public class Lanceur {
-	
+
 	public static void main(String[] args) {
 
 		String reponse = "";
@@ -223,22 +223,22 @@ public class Lanceur {
 
 			System.out.println("Saisir le thème du cours");
 			String cours = scan.next();
-						
-			// 
-			
+
+			//
+
 			while (idEtudiant == 0) {
 				idEtudiant = saisirIdentifiantEtudiantAconsulter();
 			}
 			etudiant = Dao.lireUnEtudiant(idEtudiant);
 			Cours c = Dao.selectionnerUnCours(cours);
-			
-			if (etudiant == null ) {
+
+			if (etudiant == null) {
 				System.out.println("L'étudiant n'existe pas");
 			}
-			if (c == null ) {
+			if (c == null) {
 				System.out.println("Le cours n'existe pas");
 			}
-			if(etudiant != null && c != null) {
+			if (etudiant != null && c != null) {
 				// classe anonyme
 				new CoursPersonneDao().associerCoursEtudiant(etudiant, c);
 			}
@@ -304,6 +304,5 @@ public class Lanceur {
 		}
 		return idEtudiant;
 	}
-	
-	
+
 }

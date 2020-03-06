@@ -36,8 +36,8 @@ public class CoursPersonneDao implements IService {
 
 			// etape 3 creation du statement
 			st = cn.createStatement();
-			String sql = "INSERT INTO `personne_cours` (`idPersonne`,`themeCours`) " + "VALUES ('"
-					+ etudiant.getIdPersonne() + "','" + cours.getThemeCours() + ")'";
+			String sql = "INSERT INTO `personne_cours` (`idPersonne`,`idCours`) " + "VALUES ('"
+					+ etudiant.getIdPersonne() + "','" + cours.getIdCours() + "')";
 
 			// etape 4 executer la requette
 			st.executeUpdate(sql);

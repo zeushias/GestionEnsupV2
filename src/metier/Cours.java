@@ -12,7 +12,7 @@ package metier;
 public class Cours {
 
 	// propriétés
-
+	private int idCours;
 	private String themeCours;
 	private int nombreHeure;
 
@@ -24,10 +24,25 @@ public class Cours {
 		this.nombreHeure = nombreHeure;
 	}
 
+	public Cours(int idCours, String themeCours, int nombreHeure) {
+		super();
+		this.idCours = idCours;
+		this.themeCours = themeCours;
+		this.nombreHeure = nombreHeure;
+	}
+
 	// getters et setters
 
 	public String getThemeCours() {
 		return themeCours;
+	}
+
+	public int getIdCours() {
+		return idCours;
+	}
+
+	public void setIdCours(int idCours) {
+		this.idCours = idCours;
 	}
 
 	public void setThemeCours(String themeCours) {
@@ -46,7 +61,6 @@ public class Cours {
 
 	@Override
 	public String toString() {
-		return "Cours [themeCours=" + themeCours + ", nombreHeure=" + nombreHeure + "]";
+		return "Cours [idCours=" + idCours + ", themeCours=" + themeCours + ", nombreHeure=" + nombreHeure + "]";
 	}
-
 }
