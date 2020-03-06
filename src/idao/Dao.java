@@ -23,7 +23,7 @@ public class Dao {
 
 	// information de la base de donnee
 
-	static String url = "jdbc:mysql://localhost/gestionensup";
+	static String url = "jdbc:mysql://localhost/ges_ecole_ensup";
 	static String login = "root";
 
 	static Connection cn = null;

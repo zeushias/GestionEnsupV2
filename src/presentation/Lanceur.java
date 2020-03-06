@@ -23,13 +23,13 @@ public class Lanceur {
 		Scanner sc = new Scanner(System.in);
 
 		while (!reponse.equals("O") && !reponse.equals("N")) {
-			System.out.print("Avez vous un login et mot de passe O / N  : ");
+			System.out.print("Avez vous un login et mot de passe utilisateur O / N  : ");
 			reponse = sc.next().toUpperCase();
 
 			if (!reponse.equals("O") && !reponse.equals("N")) {
 				System.out.println("Mauvaise reponse !!! Reprenez !!!");
 			}
-		} ;
+		}
 		//
 
 		if (reponse.equals("O")) {
@@ -132,6 +132,7 @@ public class Lanceur {
 	 * affichageCreationUtilisateur
 	 */
 	private static void affichageCreationUtilisateur() {
+		String profilUser = "";
 		Scanner sc = new Scanner(System.in);
 		System.out.println();
 		System.out.print("Création d'utilisateur : ");
@@ -144,9 +145,17 @@ public class Lanceur {
 		System.out.println();
 		String passwordUser = sc.next();
 		System.out.println();
-		System.out.print("Veuillez saisir votre profil utilisateur D pour Directeur R pour REsponsable étude : ");
-		System.out.println();
-		String profilUser = sc.next().toUpperCase();
+		
+		while (!profilUser.equals("R") && !profilUser.equals("D")) {
+			System.out.print("Veuillez saisir votre profil utilisateur D pour Directeur R pour Responsable étude : ");
+			System.out.println();
+			profilUser = sc.next().toUpperCase();
+
+			if (!profilUser.equals("R") && !profilUser.equals("D")) {
+				System.out.println("Mauvaise reponse !!! Reprenez !!!");
+			}
+		}
+
 		Utilisateur utilisateur = new Utilisateur(loginUser, passwordUser, profilUser);
 		Dao.creerUtilisateur(utilisateur);
 	}
