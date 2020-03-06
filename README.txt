@@ -6,6 +6,7 @@ Etape 1: Récupérer le projet
 Etape 2: Mettre en place la base de donnée:
 - Si vous n'avez pas d'éditeurs SQL, installez en un (HeidiSql, DBeaver, etc ...)
 - Une fois l'éditeur installé, copiez/collez les requettes suivantes (*) et executez les.
+- Les acces a la base de donnée se faisant par le fichier dao.java, nous partons du principe que les codes d'acces sont root.
 
 
 Etape 3: Parametrer l'executable
@@ -199,3 +200,15 @@ ALTER TABLE `personne_cours`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
