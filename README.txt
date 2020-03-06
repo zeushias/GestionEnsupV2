@@ -1,10 +1,14 @@
+Etape 1: Récupérer le projet
+- Allez a l'adresse web suivante:	https://github.com/zeushias/GestionEnsupV2
+- Cliquez sur le bouton "Clone or Download" et appuyez sur le bouton "Download ZIP"
+- Faites un extract de l'archive dans le dossier de votre choix
 
-Etape 1: Mettre en place la base de donnée:
+Etape 2: Mettre en place la base de donnée:
 - Si vous n'avez pas d'éditeurs SQL, installez en un (HeidiSql, DBeaver, etc ...)
 - Une fois l'éditeur installé, copiez/collez les requettes suivantes (*) et executez les.
 
 
-Etape 2: Parametrer l'executable
+Etape 3: Parametrer l'executable
 - Ouvrez le fichier lunch.bat et modifiez les lignes suivantes:
 	 cd "C:\Program Files\Java\jdk1.8.0_162\bin" 	
 		=> Changer le texte entre guillemets pour indiquer le chemin vers votre JDK
@@ -12,7 +16,7 @@ Etape 2: Parametrer l'executable
 	"C:\Users\zeuhias\eclipse-workspace\EtudiantEcole-master\EtudiantEcole.jar" 
 		=> Changer le texte entre quote pour indiquer le chemin vers le fichier .jar
 
-Etape 3: Lancer le logiciel
+Etape 4: Lancer le logiciel
 - Executez le fichier lunch.bat.
 
 
@@ -195,15 +199,3 @@ ALTER TABLE `personne_cours`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
