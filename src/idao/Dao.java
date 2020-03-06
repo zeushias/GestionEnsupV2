@@ -184,7 +184,7 @@ public class Dao {
 		}
 		return user;
 	}
-	
+
 	/**
 	 * 
 	 * @param etudiant
@@ -203,16 +203,15 @@ public class Dao {
 			// etape 3 creation du statement
 			st = cn.createStatement();
 			String sql = "INSERT INTO `personne` (`nom`, `prenom`,`email`, "
-					+ "`adresse`,`telephone`, `date_naissance`) "
-					+ "VALUES ('" + etudiant.getNom() + "','"+ etudiant.getPrenom() + "', '"
-					+ etudiant.getEmail()+"', '"+etudiant.getAdresse()+"', '"+etudiant.getTelephone() +"', '"+etudiant.getDateNaissanceEtudiant() +"')";
+					+ "`adresse`,`telephone`, `date_naissance`) " + "VALUES ('" + etudiant.getNom() + "','"
+					+ etudiant.getPrenom() + "', '" + etudiant.getEmail() + "', '" + etudiant.getAdresse() + "', '"
+					+ etudiant.getTelephone() + "', '" + etudiant.getDateNaissanceEtudiant() + "')";
 
 			// etape 4 executer la requette
 			st.executeUpdate(sql);
 			System.out.println("Etudiant enrégistré avec succès !!!! ");
 
 		} catch (SQLException e) {
-
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 
@@ -229,4 +228,62 @@ public class Dao {
 			}
 		}
 	}
+
+	/**
+	 * Lire les informations d'un etudiant
+	 */
+	public static void lireUnEtudiant(int idEtudiant) {
+
+		try {
+			// etape1 chargement du driver
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// etape2 recupertion de la connnexion
+
+			cn = DriverManager.getConnection(url, login, password);
+
+			// etape 3 creation du statement
+			st = cn.createStatement();
+			String sql = "select * from personne where  `idPersonne` =  '" + idEtudiant + "'";
+
+			// etape 4 executer la requette
+			System.out.println("Etudiant à consulter ");
+			rs = st.executeQuery(sql);
+
+			// etape5 parcours du resultSet
+			while (rs.next()) {
+				System.out.print(rs.getInt("idPersonne"));
+				System.out.print(" ");
+				System.out.print(rs.getString("nom"));
+				System.out.print(" ");
+				System.out.print(rs.getString("prenom"));
+				System.out.print(" ");
+				System.out.print(rs.getString("email"));
+				System.out.print(" ");
+				System.out.print(rs.getString("adresse"));
+				System.out.print(" ");
+				System.out.print(rs.getString("telephone"));
+				System.out.print(" ");
+				System.out.print(rs.getString("date_naissance"));
+				System.out.println(" ");
+			}
+
+		} catch (SQLException e) {
+			System.out.println("L'étudiant n'existe pas");
+		} catch (ClassNotFoundException e) {
+			System.out.println("L'étudiant n'existe pas");
+		} finally {
+
+			// etape 5 liberer les ressources
+			try {
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+	}
+
 }
