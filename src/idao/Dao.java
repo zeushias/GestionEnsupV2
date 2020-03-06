@@ -338,7 +338,7 @@ public class Dao {
 
 		try {
 			// Etape 1 : Chargement du driver
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 
 			// Etape 2 : R�cup�ration de la connexion
 			connection = DriverManager.getConnection(url, login, password);
@@ -390,7 +390,7 @@ public class Dao {
 
 		try {
 			// Etape 1 : Chargement du driver
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 
 			// Etape 2 : Recuperation de la connexion
 			connection = DriverManager.getConnection(url, login, password);

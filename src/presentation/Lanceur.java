@@ -232,6 +232,7 @@ public class Lanceur {
 			String email = scan.next();
 
 			dao.modifierEtudiant(idModif, email);
+			affichage();
 			break;
 		case 5:
 
