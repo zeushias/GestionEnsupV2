@@ -23,6 +23,8 @@ import service.IService;
  *
  */
 public class Lanceur {
+	static Dao dao = new Dao();
+	static String statut = "";
 
 	public static void main(String[] args) {
 
@@ -113,9 +115,11 @@ public class Lanceur {
 		if (u != null) {
 			if (u.getProfil().equals("R")) {
 				// affichage resonsable
+				statut = "R";
 				affichageResponsable();
 			} else {
 				// affichage directeur
+				statut = "D";
 				affichageDirecteur();
 			}
 		} else {
@@ -184,7 +188,7 @@ public class Lanceur {
 
 			etudiant = enregistrementEtudiant();
 			Dao.creerEtudiant(etudiant);
-
+			affichage();
 			break;
 		case 2:
 
@@ -211,13 +215,23 @@ public class Lanceur {
 				// compteur++;
 				System.out.println("L'étudiant n'existe pas");
 			}
-
+			affichage();
 			break;
 
 		case 3:
-
+			System.out.println("Saisir l'identifiant de l'etudiant ");
+			int id = scan.nextInt();
+			Dao etuDao = new Dao();
+			etuDao.supprimerEtudiant(id);
+			affichage();
 			break;
 		case 4:
+			System.out.println("Saisir l'identifiant de l'etudiant a modifier ");
+			int idModif = scan.nextInt();
+			System.out.println("Saisir l'adresse a modifier ");
+			String email = scan.next();
+
+			dao.modifierEtudiant(idModif, email);
 			break;
 		case 5:
 
@@ -242,13 +256,14 @@ public class Lanceur {
 				// classe anonyme
 				new CoursPersonneDao().associerCoursEtudiant(etudiant, c);
 			}
+			affichage();
 			break;
 		case 6:
 			// lister les étudiants
 			System.out.println();
 			System.out.println("La liste des étudiants");
 			Dao.lireEtudiant();
-
+			affichage();
 			break;
 		default:
 			break;
@@ -278,7 +293,7 @@ public class Lanceur {
 		System.out.print("entrer le téléphone de l'étudiant : ");
 		String telephoneEtudiant = scan.next();
 		System.out.println();
-		System.out.print("entrer la date de naissance de l'étudiant : ");
+		System.out.print("entrer la date de naissance de l'étudiant JJ/MM/AAAA : ");
 		String dateNaissance = scan.next();
 		System.out.println();
 
@@ -303,6 +318,22 @@ public class Lanceur {
 			System.out.println("Vous devez saisir un nombre  ");
 		}
 		return idEtudiant;
+	}
+
+	public static void affichage() {
+		if (statut.equals("D")) {
+			affichageDirecteur();
+			// récupération du chiffre saisie
+			int saisie = saisieOperation();
+			//
+			operation(saisie);
+		} else {
+			affichageResponsable();
+			// récupération du chiffre saisie
+			int saisie = saisieOperation();
+			//
+			operation(saisie);
+		}
 	}
 
 }

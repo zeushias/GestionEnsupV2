@@ -32,7 +32,7 @@ public class Dao {
 	static ResultSet rs = null;
 
 	/**
-	 * liste des étudiants
+	 * liste des Ã©tudiants
 	 */
 	public static void lireEtudiant() {
 
@@ -114,7 +114,7 @@ public class Dao {
 
 			// etape 4 executer la requette
 			st.executeUpdate(sql);
-			System.out.println("Utilisateur enrégistré avec succès !!!! ");
+			System.out.println("Utilisateur enrÃ©gistrÃ© avec succÃ¨s !!!! ");
 
 		} catch (SQLException e) {
 
@@ -210,7 +210,7 @@ public class Dao {
 
 			// etape 4 executer la requette
 			st.executeUpdate(sql);
-			System.out.println("Etudiant enrégistré avec succès !!!! ");
+			System.out.println("Etudiant enrÃ©gistrÃ© avec succÃ¨s !!!! ");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -260,9 +260,9 @@ public class Dao {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("L'étudiant n'existe pas");
+			System.out.println("L'Ã©tudiant n'existe pas");
 		} catch (ClassNotFoundException e) {
-			System.out.println("L'étudiant n'existe pas");
+			System.out.println("L'Ã©tudiant n'existe pas");
 		} finally {
 
 			// etape 5 liberer les ressources
@@ -322,4 +322,105 @@ public class Dao {
 		return c;
 	}
 
+	/**
+	 * delete etudiant
+	 * 
+	 * @param id
+	 */
+	public void supprimerEtudiant(int id) {
+
+		// Information d'accï¿½s ï¿½ la base de donnï¿½es
+		
+		int resultat;
+
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			// Etape 1 : Chargement du driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// Etape 2 : Rï¿½cupï¿½ration de la connexion
+			connection = DriverManager.getConnection(url, login, password);
+
+			// Etape 3 : Creation d'un statement
+			statement = connection.createStatement();
+
+			String sql = "delete from personne where idPersonne ='" + id + "'";
+
+			// Etape 4 : Execution requete
+			resultat = statement.executeUpdate(sql);
+
+			if (resultat == 0) {
+				System.out.println("Aucun etudiant ne possÃ¨de cet id \n");
+			} else {
+				System.out.println("L'etudiant a bien Ã©tÃ© supprimÃ© \n");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// Etape 5 : Libï¿½rer ressources de la mï¿½moire
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	/**
+	 * update etudiant
+	 * 
+	 * @param id
+	 * @param email
+	 */
+
+	public void modifierEtudiant(int id, String email) {
+
+		// Information d'acces a la base de donnees
+		
+		int resultat;
+
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			// Etape 1 : Chargement du driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			// Etape 2 : Recuperation de la connexion
+			connection = DriverManager.getConnection(url, login, password);
+
+			// Etape 3 : Creation d'un statement
+			statement = connection.createStatement();
+
+			String sql = "Update personne Set email= '" + email + "'where idPersonne ='" + id + "'";
+
+			// Etape 4 : Execution requete
+			resultat = statement.executeUpdate(sql);
+
+			if (resultat == 0) {
+				System.out.println("Aucun etudiant ne possÃ¨de cet id \n");
+			} else {
+				System.out.println("Nouvelle email mise a jour \n");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// Etape 5 : Liberer ressources de la memoire
+				connection.close();
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
 }
