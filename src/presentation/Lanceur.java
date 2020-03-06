@@ -168,30 +168,9 @@ public class Lanceur {
 		Scanner scan = new Scanner(System.in);
 		switch (chiffre) {
 		case 1:
-			// enrégistrer une école
-			System.out.println();
-			System.out.println("--------------------------------------------------------------");
-			System.out.print("entrer le nom de l'étudiant : ");
-			String nomEtudiant = scan.next();
-			System.out.println();
-			System.out.print("entrer le prenom de l'étudiant : ");
-			String prenomEtudiant = scan.next();
-			System.out.println();
-			System.out.print("entrer l'email de l'étudiant : ");
-			String emailEtudaint = scan.next();
-			System.out.println();
-			System.out.print("entrer l'adresse de l'école : ");
-			String adresseEtudiant = scan.next();
-			System.out.println();
-			System.out.print("entrer le téléphone de l'étudiant : ");
-			String telephoneEtudiant = scan.next();
-			System.out.println();
-			System.out.print("entrer la date de naissance de l'étudiant : ");
-			String dateNaissance = scan.next();
-			System.out.println();
+			// enrégistrer un étudiant
 
-			Etudiant etudiant = new Etudiant(nomEtudiant, prenomEtudiant, emailEtudaint, adresseEtudiant,
-					telephoneEtudiant, new Date());
+			Etudiant etudiant = enregistrementEtudiant();
 			Dao.creerEtudiant(etudiant);
 
 			break;
@@ -216,5 +195,37 @@ public class Lanceur {
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * 
+	 * @return un étudiant
+	 */
+	public static Etudiant enregistrementEtudiant() {
+		Scanner scan = new Scanner(System.in);
+		System.out.println();
+		System.out.println("--------------------------------------------------------------");
+		System.out.print("entrer le nom de l'étudiant : ");
+		String nomEtudiant = scan.next();
+		System.out.println();
+		System.out.print("entrer le prenom de l'étudiant : ");
+		String prenomEtudiant = scan.next();
+		System.out.println();
+		System.out.print("entrer l'email de l'étudiant : ");
+		String emailEtudaint = scan.next();
+		System.out.println();
+		System.out.print("entrer l'adresse de l'école : ");
+		String adresseEtudiant = scan.next();
+		System.out.println();
+		System.out.print("entrer le téléphone de l'étudiant : ");
+		String telephoneEtudiant = scan.next();
+		System.out.println();
+		System.out.print("entrer la date de naissance de l'étudiant : ");
+		String dateNaissance = scan.next();
+		System.out.println();
+
+		Etudiant etudiant = new Etudiant(nomEtudiant, prenomEtudiant, emailEtudaint, adresseEtudiant,
+				telephoneEtudiant, new Date());
+		return etudiant;
 	}
 }

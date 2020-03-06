@@ -1,5 +1,5 @@
 /**
- * 
+ * la classe "cours"
  */
 package metier;
 
