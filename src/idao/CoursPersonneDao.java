@@ -41,7 +41,7 @@ public class CoursPersonneDao implements IService {
 
 			// etape 4 executer la requette
 			st.executeUpdate(sql);
-			System.out.println("Cours associï¿½ a l'ï¿½tudiant avec succï¿½s !!!! ");
+			System.out.println("Cours associé a l'étudiant avec succès !!!! ");
 
 		} catch (SQLException e) {
 

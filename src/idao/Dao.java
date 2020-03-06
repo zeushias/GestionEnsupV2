@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import metier.Cours;
 import metier.Etudiant;
 import metier.Utilisateur;
 
@@ -274,6 +275,51 @@ public class Dao {
 			}
 		}
 		return etudiant;
+	}
+
+	/**
+	 * Lire les informations d'un etudiant
+	 */
+	public static Cours selectionnerUnCours(String cours) {
+		Cours c = null;
+		try {
+			// etape1 chargement du driver
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			// etape2 recupertion de la connnexion
+
+			cn = DriverManager.getConnection(url, login, password);
+
+			// etape 3 creation du statement
+			st = cn.createStatement();
+			String sql = "select * from cours where  `theme` =  '" + cours + "'";
+
+			// etape 4 executer la requette
+			
+			rs = st.executeQuery(sql);
+
+			// etape5 parcours du resultSet
+			while (rs.next()) {
+				c = new Cours(rs.getString("theme"), rs.getInt("nombreHeure"));
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Le cours n'existe pas");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Le cours n'existe pas");
+		} finally {
+
+			// etape 5 liberer les ressources
+			try {
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		return c;
 	}
 
 }
